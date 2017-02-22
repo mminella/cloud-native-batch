@@ -43,7 +43,7 @@ public class EnrichmentProcessor implements ItemProcessor<Foo, Foo> {
 	@Override
 	public Foo process(Foo foo) throws Exception {
 		ResponseEntity<String> responseEntity = this.restTemplate.exchange(
-				"http://localhost:8080/enrich",
+				"http://rest-service/enrich",
 				HttpMethod.GET,
 				null,
 				String.class);

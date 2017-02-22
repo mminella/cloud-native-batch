@@ -1,4 +1,4 @@
-* Create an `application.properties` or `application.yml` in `batch-job/src/main/resources` with the following properties configured:
+* Configure the Spring Cloud Config Server with an `application.properties` or `application.yml` in `batch-job/src/main/resources` with the following properties configured:
     * `spring.datasource.driverClassName`
     * `spring.datasource.url`
     * `spring.datasource.username`
@@ -9,6 +9,7 @@
     * `cloud.aws.credentials.secretKey`
     * `cloud.aws.region.static` - the region the S3 bucket exists in
     * `cloud.aws.region.auto` - this should be false unless you are running this on AWS
+* Launch the Config server & eureka via `spring cloud configserver eureka`
 * Build the project from the root via `./mvnw clean install`
 * From the root, execute `java -jar rest-service/target/rest-service-0.0.1-SNAPSHOT.jar`
 * from the root, execute `java -jar batch-job/target/batch-job-0.0.1-SNAPSHOT.jar`
