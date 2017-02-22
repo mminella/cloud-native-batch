@@ -28,8 +28,13 @@ public class EnrichmentController {
 
 	@GetMapping("/enrich")
 	public String enrich() {
-		this.count++;
+		if(Math.random() > .5) {
+			throw new RuntimeException("I screwed up");
+		}
+		else {
+			this.count++;
 
-		return String.format("Enriched %s", this.count);
+			return String.format("Enriched %s", this.count);
+		}
 	}
 }
