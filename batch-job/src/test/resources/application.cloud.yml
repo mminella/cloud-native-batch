@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: cloud-native-batch
+  cloud:
+    config:
+      failFast: true

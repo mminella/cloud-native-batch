@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_native_batch?cachePrepStmts=true&elideSetAutoCommits=true&alwaysSendSetIsolation=false&cacheResultSetMetadata=true
+    username: 'root'
+    password: 'p@ssw0rd'
+    schema: schema-mysql.sql
+job:
+  resource-path: s3://connected-car-artifacts/inputs/*.csv
+cloud:
+  aws:
+    credentials:
+      accessKey: 'AKIAJ246M6CT4XJLOFBQ'
+      secretKey: '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'
+    region:
+      static: us-east-1
+      auto: false
+
