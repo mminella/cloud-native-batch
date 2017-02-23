@@ -10,7 +10,6 @@ _site/
 /application.properties
 asciidoctor.css
 atlassian-ide-plugin.xml
-bin/
 build/
 dump.rdb
 out

@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-import javax.swing.Spring;
 
 import io.spring.batch.DownloadingStepExecutionListener;
 import io.spring.batch.EnrichmentProcessor;
@@ -46,7 +45,7 @@ import org.springframework.cloud.task.batch.partition.CommandLineArgsProvider;
 import org.springframework.cloud.task.batch.partition.DeployerPartitionHandler;
 import org.springframework.cloud.task.batch.partition.DeployerStepExecutionHandler;
 import org.springframework.cloud.task.batch.partition.NoOpEnvironmentVariablesProvider;
-import org.springframework.cloud.task.batch.partition.SimpleCommandLineArgsProvider;
+import org.springframework.cloud.task.batch.partition.PassThroughCommandLineArgsProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -95,15 +94,15 @@ public class JobConfiguration {
 		}
 
 		@Bean
-		public SimpleCommandLineArgsProvider commandLineArgsProvider() {
-			SimpleCommandLineArgsProvider provider = new SimpleCommandLineArgsProvider();
+		public PassThroughCommandLineArgsProvider commandLineArgsProvider() {
 
 			List<String> commandLineArgs = new ArrayList<>(4);
 			commandLineArgs.add("--spring.profiles.active=worker");
 			commandLineArgs.add("--spring.cloud.task.initialize.enable=false");
 			commandLineArgs.add("--spring.batch.initializer.enabled=false");
 			commandLineArgs.add("--spring.datasource.initialize=false");
-			provider.setAppendedArgs(commandLineArgs);
+
+			PassThroughCommandLineArgsProvider provider = new PassThroughCommandLineArgsProvider(commandLineArgs);
 
 			return provider;
 		}

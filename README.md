@@ -11,6 +11,24 @@
     * `cloud.aws.region.auto` - this should be false unless you are running this on AWS
 * Launch the Config server & eureka via `spring cloud configserver eureka`
 * Build the project from the root via `./mvnw clean install`
-* From the root, execute `java -jar rest-service/target/rest-service-0.0.1-SNAPSHOT.jar`
-* from the root, execute `java -jar batch-job/target/batch-job-0.0.1-SNAPSHOT.jar`
+* Launch Skipper via:
+```
+java -jar bin/spring-cloud-skipper-server-2.0.0.RELEASE.jar \
+    --spring.datasource.url=jdbc:mysql://localhost:3306/cloud_native_batch \
+    --spring.datasource.username=root \
+    --spring.datasource.password=p@ssw0rd \
+    --spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+```
+* Launch Spring Cloud Data Flow (SCDF) via:
+```
+java -jar bin/spring-cloud-dataflow-server-2.0.1.RELEASE.jar \
+    --spring.datasource.url=jdbc:mysql://localhost:3306/cloud_native_batch \
+    --spring.datasource.username=root \
+    --spring.datasource.password=p@ssw0rd \
+    --spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+```
+* Launch Spring Cloud Data Flow Shell via `java -jar bin/spring-cloud-dataflow-shell-2.0.1.RELEASE.jar`
+* Register the app with SCDF in the shell via `app register --name S3JDBC --type task --uri "maven://io.spring.cloud-native-batch:batch-job:0.0.1-SNAPSHOT"`
+* Launch the UI from http://localhost:9393/dashboard
+* Launch the task via the UI
 * Verify results via the query `select * from cloud_native_batch.foo;` assuming your schema is called `cloud_native_batch`
